@@ -32,3 +32,5 @@ config/deploy/*
 
 config/database.yml
 config/secrets.yml
+
+.idea/workspace.xml

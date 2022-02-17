@@ -34,3 +34,4 @@ config/database.yml
 config/secrets.yml
 
 .idea/workspace.xml
+.idea/runConfigurations/

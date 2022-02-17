@@ -54,6 +54,7 @@ group :development do
   gem 'capistrano-linked-files'
   gem 'capistrano-rvm', '0.1.2'
   gem 'capistrano-deploytags'
+  gem 'capistrano-passenger'
 end
 
 group :test do

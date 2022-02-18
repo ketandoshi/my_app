@@ -37,4 +37,4 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          bundle exec cap production deploy
+          bundle exec cap staging deploy

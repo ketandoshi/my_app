@@ -37,5 +37,5 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          cd /
+          working-directory: my_app
           bundle exec cap staging deploy

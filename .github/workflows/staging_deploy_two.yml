@@ -1,4 +1,4 @@
-name: Deploy To Staging Server2
+name: Deploy To Staging Server Two
 
 on:
   # Manually deploy branch

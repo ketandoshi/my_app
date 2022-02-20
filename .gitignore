@@ -26,12 +26,12 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-Capfile
-config/deploy.rb
-config/deploy/*
+#Capfile
+#config/deploy.rb
+#config/deploy/*
 
 config/database.yml
-config/secrets.yml
+#config/secrets.yml
 
 .idea/workspace.xml
 .idea/runConfigurations/

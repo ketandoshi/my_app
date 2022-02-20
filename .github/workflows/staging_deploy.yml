@@ -8,8 +8,7 @@ on:
 jobs:
   deploy:
     name: Capistrano Deploy to Staging Server
-    #runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Install SSH key to Server

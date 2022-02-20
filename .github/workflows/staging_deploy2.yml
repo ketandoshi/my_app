@@ -1,4 +1,4 @@
-name: Deploy to staging server
+name: Deploy To Staging Server2
 
 on:
   # Manually deploy branch
@@ -23,4 +23,3 @@ jobs:
         with:
           target: development # Defines the environment that will be used for the deployment
           deploy_key: ${{ secrets.SSH_KEY }} # Name of the variable configured in Settings/Secrets of your github project
-          

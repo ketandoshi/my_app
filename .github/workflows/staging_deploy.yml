@@ -34,8 +34,8 @@ jobs:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - name: Deploy to staging
+        working-directory: my_app
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          working-directory: my_app
           bundle exec cap staging deploy

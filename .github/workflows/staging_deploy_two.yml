@@ -18,8 +18,9 @@ jobs:
           ruby-version: 2.6.6
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
-      - name: Deploy to staging
       - uses: miloserdow/capistrano-deploy@master
         with:
           target: development # Defines the environment that will be used for the deployment
           deploy_key: ${{ secrets.SSH_KEY }} # Name of the variable configured in Settings/Secrets of your github project
+          #enc_rsa_key_val: ${{ secrets.SSH_KEY }}
+          working-directory: /home/ubuntu/workspace/my_app/

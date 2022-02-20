@@ -22,5 +22,5 @@ jobs:
         with:
           target: development # Defines the environment that will be used for the deployment
           deploy_key: ${{ secrets.SSH_KEY }} # Name of the variable configured in Settings/Secrets of your github project
-          #enc_rsa_key_val: ${{ secrets.SSH_KEY }}
+          enc_rsa_key_val: ${{ secrets.ENC_KEY_PWD }}
           working-directory: /home/ubuntu/workspace/my_app/

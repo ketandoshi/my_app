@@ -9,9 +9,10 @@ jobs:
   deploy:
     name: Test Capistrano Deploy to Staging Server
     runs-on: ubuntu-latest
+    concurrency: staging_environment
     environment: staging
     env:
-      STAGING_SERVER_IP: ${{ secrets.SSH_HOST }}
+      STAGING_SERVER_IP: ${{ secrets.SG_SGT_STAGING_SERVER_IP }}
 
     steps:
       - name: Install SSH key to Server
@@ -42,3 +43,7 @@ jobs:
           ssh-add ~/.ssh/github-actions
           ssh-add ~/.ssh/id_rsa
           bundle exec cap staging deploy
+  db_migration:
+    needs: deploy
+  restart_server:
+    needs: [deploy, db_migration]

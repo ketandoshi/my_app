@@ -81,9 +81,8 @@ server '34.219.95.227',
        user: 'deploy_user',
        roles: %w{web app db},
        ssh_options: {
-           # keys: ["/Users/ketan/.ssh/ketan-latest-keys.pem"],
-           # keys: ["/home/ubuntu/.ssh/ketan-latest-keys.pem"],
-           keys: ["/home/ubuntu/.ssh/id_rsa"],
+           # keys: ["/home/ubuntu/.ssh/id_rsa"],
+           keys: [ENV.fetch('SSH_ID_RSA')],
            forward_agent: true,
            auth_methods: %w(publickey password)
        }

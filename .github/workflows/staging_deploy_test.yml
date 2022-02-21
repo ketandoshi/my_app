@@ -47,8 +47,9 @@ jobs:
 
       - name: DB migration
         run: |
+          eval "$(ssh-agent -s)"
           bundle exec cap staging deploy:migrate
 
-      - name: Restart servver
+      - name: Restart server
         run: |
           bundle exec cap staging deploy:restart

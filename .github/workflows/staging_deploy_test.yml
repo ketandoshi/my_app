@@ -43,7 +43,7 @@ jobs:
           ssh-add ~/.ssh/github-actions
           ssh-add ~/.ssh/id_rsa
           bundle exec cap staging deploy
-  db_migration:
-    needs: deploy
-  restart_server:
-    needs: [deploy, db_migration]
+#  db_migration:
+#    needs: deploy
+#  restart_server:
+#    needs: [deploy, db_migration]

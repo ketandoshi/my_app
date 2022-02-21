@@ -82,7 +82,7 @@ server '34.219.95.227',
        roles: %w{web app db},
        ssh_options: {
            # keys: ["/Users/ketan/.ssh/ketan-latest-keys.pem"],
-           keys: ["/home/ubuntu/.ssh/ketan-latest-keys.pem"],
+           # keys: ["/home/ubuntu/.ssh/ketan-latest-keys.pem"],
            forward_agent: true,
            auth_methods: %w(publickey password)
        }

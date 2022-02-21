@@ -1,7 +1,6 @@
 name: Test Deploy To Staging Server
 
 on:
-  # Manually deploy branch
   workflow_dispatch:
     branches: [ main ]
 
@@ -15,14 +14,14 @@ jobs:
       STAGING_SERVER_IP: ${{ secrets.SG_SGT_STAGING_SERVER_IP }}
 
     steps:
-      - name: Install Github-actions key to runner
+      - name: Install Github actions key to runner
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_KEY }}
           name: github-actions
           known_hosts: 'random-placeholder-value-replaced-by-keyscan-below'
 
-      - name: Install target server - deploy_user key to runner
+      - name: Install target server - deploy user key to runner
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_ID_RSA }}
@@ -36,7 +35,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6.6
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          bundler-cache: true
 
       - name: Deploy to staging
         working-directory:
@@ -45,7 +44,11 @@ jobs:
           ssh-add ~/.ssh/github-actions
           ssh-add ~/.ssh/id_rsa
           bundle exec cap staging deploy
-#  db_migration:
-#    needs: deploy
-#  restart_server:
-#    needs: [deploy, db_migration]
+
+      - name: DB migration
+        run: |
+          bundle exec cap staging deploy:migrate
+
+      - name: Restart servver
+        run: |
+          bundle exec cap staging deploy:restart

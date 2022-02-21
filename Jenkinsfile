@@ -9,6 +9,5 @@ pipeline {
             bundle exec cap staging deploy'''
       }
     }
-
   }
 }

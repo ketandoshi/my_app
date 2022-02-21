@@ -82,7 +82,7 @@ server '34.219.95.227',
        roles: %w{web app db},
        ssh_options: {
            # keys: ["/home/ubuntu/.ssh/id_rsa"],
-           keys: [ENV.fetch('SSH_ID_RSA')],
+           keys: [ENV.fetch('SSH_ID_RSA_ENV')],
            forward_agent: true,
            auth_methods: %w(publickey password)
        }

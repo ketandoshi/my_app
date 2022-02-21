@@ -64,6 +64,7 @@ set :environment, 'staging'
 
 set :deploy_to, "/home/deploy_user/capistrano/#{fetch :application}"
 
+# Github actions - Capistrano
 server ENV.fetch('STAGING_SERVER_IP'),
        user: 'deploy_user',
        roles: %w{web app db},
@@ -72,4 +73,3 @@ server ENV.fetch('STAGING_SERVER_IP'),
            forward_agent: true,
            auth_methods: %w(publickey)
        }
-

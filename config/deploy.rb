@@ -46,15 +46,15 @@ set :conditionally_migrate, true
 
 namespace :deploy do
 
-  # task :migrate do
-  #   on roles(:db) do
-  #     within "#{fetch(:deploy_to)}/current/" do
-  #       with RAILS_ENV: fetch(:environment) do
-  #         execute :rake, "db:migrate"
-  #       end
-  #     end
-  #   end
-  # end
+  task :migrate do
+    on roles(:db) do
+      within "#{fetch(:deploy_to)}/current/" do
+        with RAILS_ENV: fetch(:environment) do
+          execute :rake, "db:migrate"
+        end
+      end
+    end
+  end
 
   task :restart do
     on roles(:web) do

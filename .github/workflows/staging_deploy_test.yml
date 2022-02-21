@@ -9,6 +9,9 @@ jobs:
   deploy:
     name: Test Capistrano Deploy to Staging Server
     runs-on: ubuntu-latest
+    environment: staging
+    env:
+      STAGING_SERVER_IP: ${{ secrets.SSH_HOST }}
 
     steps:
       - name: Install SSH key to Server

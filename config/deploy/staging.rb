@@ -77,11 +77,10 @@ set :deploy_to, "/home/deploy_user/capistrano/#{fetch :application}"
 #            auth_methods: %w(publickey password)
 #        }
 
-server '34.219.95.227',
+server ENV.fetch('STAGING_SERVER_IP'),
        user: 'deploy_user',
        roles: %w{web app db},
        ssh_options: {
-           # keys: ["/home/ubuntu/.ssh/id_rsa"],
            keys: [""],
            forward_agent: true,
            auth_methods: %w(publickey)

@@ -60,22 +60,9 @@
 #     # password: "please use keys"
 #   }
 
-#deploy_user_k
-#ubuntu
-#deploy_user
-
 set :environment, 'staging'
 
 set :deploy_to, "/home/deploy_user/capistrano/#{fetch :application}"
-
-# server '34.212.175.241',
-#        user: 'deploy_user_k',
-#        roles: %w{web app db},
-#        ssh_options: {
-#            keys: ["/Users/ketan/.ssh/ketan-latest-keys.pem"],
-#            forward_agent: true,
-#            auth_methods: %w(publickey password)
-#        }
 
 server ENV.fetch('STAGING_SERVER_IP'),
        user: 'deploy_user',

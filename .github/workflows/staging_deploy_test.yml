@@ -17,17 +17,16 @@ jobs:
       - name: Install Github actions key to runner
         uses: shimataro/ssh-key-action@v2
         with:
-          #key: ${{ secrets.SSH_KEY }}
           key: ${{ secrets.SSH_KEY_GITHUB_ACTIONS }}
           name: github-actions
           known_hosts: unnecessary
 
-      - name: Install target server - deploy user key to runner
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_ID_RSA }}
-          name: id_rsa
-          known_hosts: unnecessary
+#      - name: Install target server - deploy user key to runner
+#        uses: shimataro/ssh-key-action@v2
+#        with:
+#          key: ${{ secrets.SSH_ID_RSA }}
+#          name: id_rsa
+#          known_hosts: unnecessary
 
       - name: Checkout the source code
         uses: actions/checkout@v2
@@ -42,7 +41,6 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          ssh-add ~/.ssh/id_rsa
           bundle exec cap staging deploy
 
       - name: DB migration
@@ -50,7 +48,6 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          ssh-add ~/.ssh/id_rsa
           bundle exec cap staging deploy:migrate
 
       - name: Restart server
@@ -58,5 +55,4 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          ssh-add ~/.ssh/id_rsa
           bundle exec cap staging deploy:restart

@@ -50,6 +50,9 @@ jobs:
       - name: DB migration
         if: ${{ success() }}
         run: |
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/github-actions
+          ssh-add ~/.ssh/id_rsa
           bundle exec cap staging deploy:migrate
 
       - name: Restart server

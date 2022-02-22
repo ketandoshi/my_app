@@ -37,6 +37,7 @@ jobs:
           bundler-cache: true
 
       - name: Executing custom task on staging
+        working_directory:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions

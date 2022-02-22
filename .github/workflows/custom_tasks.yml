@@ -4,3 +4,6 @@ on: workflow_dispatch
 
 jobs:
   do_nothing:
+    steps:
+      - name: Nothing to do
+      

@@ -64,4 +64,12 @@ namespace :deploy do
     end
   end
 
+  task :execute_onetimer, :task_name do |t, args|
+    on roles(:script) do
+      within "#{fetch(:deploy_to)}/current/" do
+        execute :rake, args[:task_name]
+      end
+    end
+  end
+
 end

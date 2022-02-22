@@ -38,11 +38,10 @@ jobs:
           bundler-cache: true
 
       - name: Deploy to staging
-#        working-directory:
         run: |
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/github-actions
-          ssh-add ~/.ssh/id_rsa
+#          eval "$(ssh-agent -s)"
+#          ssh-add ~/.ssh/github-actions
+#          ssh-add ~/.ssh/id_rsa
           bundle exec cap staging deploy
 
       - name: DB migration

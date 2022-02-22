@@ -38,4 +38,6 @@ jobs:
       - name: Executing custom task on staging
         run: |
           echo "Task provided: ${{ github.event.inputs.task_name }}"
-          RAILS_ENV=staging bundle exec rake "${{ github.event.inputs.task_name }}"
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/github-actions
+          RAILS_ENV=staging bundle exec rake ${{ github.event.inputs.task_name }} --trace

@@ -17,7 +17,7 @@ jobs:
     environment: staging
     env:
       STAGING_SERVER_IP_ONE: ${{ secrets.SG_STAGING_SERVER_IP_ONE }}
-      SG_RAILS_MASTER_KEY: ${{ secrets.SG_RAILS_MASTER_KEY }}
+      STAGING_SERVER_IP_TWO: ${{ secrets.SG_STAGING_SERVER_IP_TWO }}
 
     steps:
       - name: Install Github actions key to runner

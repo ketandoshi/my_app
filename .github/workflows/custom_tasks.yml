@@ -3,3 +3,4 @@ name: Custom tasks
 on: workflow_dispatch
 
 jobs:
+  do_nothing:

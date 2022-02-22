@@ -76,7 +76,7 @@ server ENV.fetch('STAGING_SERVER_IP_ONE'),
 
 server ENV.fetch('STAGING_SERVER_IP_TWO'),
        user: 'deploy_user',
-       roles: %w{web app db},
+       roles: %w{web app},
        ssh_options: {
            keys: [''],
            forward_agent: true,

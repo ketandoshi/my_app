@@ -1,1 +1,3 @@
 name: Custom tasks
+
+on: workflow_dispatch

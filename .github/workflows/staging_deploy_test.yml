@@ -17,19 +17,17 @@ jobs:
       - name: Install Github actions key to runner
         uses: shimataro/ssh-key-action@v2
         with:
-          key: ${{ secrets.SSH_KEY }}
+          #key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SSH_KEY_GITHUB_ACTIONS }}
           name: github-actions
-          known_hosts: 'random-placeholder-value-replaced-by-keyscan-below'
+          known_hosts: unnecessary
 
       - name: Install target server - deploy user key to runner
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_ID_RSA }}
           name: id_rsa
-          known_hosts: 'random-placeholder-value-replaced-by-keyscan-below'
-
-      - name: Adding Known Hosts
-        run: ssh-keyscan -H ${{ secrets.SSH_HOST }}
+          known_hosts: unnecessary
 
       - name: Checkout the source code
         uses: actions/checkout@v2

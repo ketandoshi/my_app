@@ -69,7 +69,7 @@ server ENV.fetch('STAGING_SERVER_IP'),
        user: 'deploy_user',
        roles: %w{web app db},
        ssh_options: {
-           keys: [""],
+           keys: ["/home/ubuntu/.ssh/id_rsa"],
            forward_agent: true,
            auth_methods: %w(publickey)
        }

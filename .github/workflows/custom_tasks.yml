@@ -8,6 +8,14 @@ on:
       task_name:
         description: 'Provide name of the task (eg: custom_task:create_sample_articles)'
         required: true
+      name:
+        type: choice
+        description: Who to greet
+        options:
+        - monalisa
+        - cschleiden
+      environment:
+        type: environment
 
 jobs:
   execute_task:

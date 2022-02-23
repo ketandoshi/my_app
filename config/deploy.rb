@@ -74,4 +74,16 @@ namespace :deploy do
     end
   end
 
+  task :stop_resque do
+    on roles(:job) do
+      within "#{fetch(:deploy_to)}/current/" do
+        with RAILS_ENV: fetch(:environment) do
+          execute :rake, "resque:stop_scheduler"
+          execute :rake, "resque:stop_workers"
+          execute "echo `ps aux | grep [r]esque | grep -v grep | cut -c 10-16`"
+        end
+      end
+    end
+  end
+
 end

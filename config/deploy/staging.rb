@@ -67,7 +67,7 @@ set :deploy_to, "/home/deploy_user/capistrano/#{fetch :application}"
 # Github actions - Capistrano
 server ENV.fetch('STAGING_SERVER_IP_ONE'),
        user: 'deploy_user',
-       roles: %w{web app db script},
+       roles: %w{web app db script job},
        ssh_options: {
            keys: [''],
            forward_agent: true,

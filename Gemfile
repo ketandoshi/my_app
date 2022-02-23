@@ -34,6 +34,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'faker'
 
+gem 'redis'
+gem 'resque-scheduler'
+gem 'resque-retry'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 

@@ -10,12 +10,12 @@ on:
         required: true
       name:
         type: choice
-        description: Who to greet
+        description: Select region
         options:
-        - monalisa
-        - cschleiden
-      environment:
-        type: environment
+        - SG
+        - HK
+        - MY
+        - ALL
 
 jobs:
   execute_task:

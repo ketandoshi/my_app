@@ -75,7 +75,7 @@ end
 
 set :ssh_options, {
   user: "deploy_user",
-  keys: %w(/Users/ketan/.ssh/ketan-latest-keys.pem),
+  keys: '',
   keys_only: true,
   forward_agent: true,
   auth_methods: %w(publickey)

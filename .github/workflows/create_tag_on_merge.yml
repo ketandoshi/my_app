@@ -1,4 +1,6 @@
-on: 
+name: Create tags on merge
+
+on:
   push:
     branches:
       - main

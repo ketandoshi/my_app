@@ -3,11 +3,13 @@ name: Create tag on develop
 on:
   push:
     branches: [ main ]
+
 jobs:
-  release-on-push:
+  release_on_push:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   steps:
     - name: Create tag
       uses: rymndhng/release-on-push-action@master

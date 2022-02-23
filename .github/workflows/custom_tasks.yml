@@ -8,14 +8,14 @@ on:
       task_name:
         description: 'Provide name of the task (eg: custom_task:create_sample_articles)'
         required: true
-      name:
+      region:
         type: choice
         description: Select region
         options:
+        - ALL
         - SG
         - HK
         - MY
-        - ALL
 
 jobs:
   execute_task:
@@ -49,4 +49,4 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          bundle exec cap staging deploy:execute_onetimer["${{ github.event.inputs.task_name }}"]
+          bundle exec cap staging deploy:execute_onetimer["${{ github.event.inputs.task_name }}"] REGION=${{ github.event.inputs.region }}

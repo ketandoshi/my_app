@@ -64,21 +64,31 @@ set :environment, 'staging'
 
 set :deploy_to, "/home/deploy_user/capistrano/#{fetch :application}"
 
-# Github actions - Capistrano
-server ENV.fetch('STAGING_SERVER_IP_ONE'),
-       user: 'deploy_user',
-       roles: %w{web app db script job},
-       ssh_options: {
-           keys: [''],
-           forward_agent: true,
-           auth_methods: %w(publickey)
-       }
+# Check if region is mentioned. Else throw exception.
+unless ["sg", "hk", "my", "all"].include?(ENV["REGION"].to_s.downcase)
+  puts "  * !!!!!!!!!!!"
+  puts "  * Error: Please mention REGION=[sg|hk|my|all] at the end."
+  puts "  * Usage: cap staging deploy REGION=sg"
+  puts "  * !!!!!!!!!!!"
+  exit
+end
 
-server ENV.fetch('STAGING_SERVER_IP_TWO'),
-       user: 'deploy_user',
-       roles: %w{web app},
-       ssh_options: {
-           keys: [''],
-           forward_agent: true,
-           auth_methods: %w(publickey)
-       }
+set :ssh_options, {
+  user: "deploy_user",
+  keys: %w(/Users/ketan/.ssh/ketan-latest-keys.pem),
+  keys_only: true,
+  forward_agent: true,
+  auth_methods: %w(publickey)
+}
+
+# Set servers
+if ENV["REGION"].downcase == "sg"
+  server ENV.fetch('STAGING_SERVER_IP_ONE'), roles: %w{web app db script job}
+elsif ENV["REGION"].downcase == "hk"
+  server ENV.fetch('STAGING_SERVER_IP_TWO'), roles: %w{web app db script job}
+elsif ENV["REGION"].downcase == "my"
+  #
+elsif ENV["REGION"].downcase == "all"
+  server ENV.fetch('STAGING_SERVER_IP_ONE'), roles: %w{web app db script job}
+  server ENV.fetch('STAGING_SERVER_IP_TWO'), roles: %w{web app db script job}
+end

@@ -3,6 +3,15 @@ name: Staging - Deploy To staging
 on:
   workflow_dispatch:
     branches: [ main ]
+    inputs:
+      region:
+        type: choice
+        description: Select region
+        options:
+        - ALL
+        - SG
+        - HK
+        - MY
 
 jobs:
   deploy:
@@ -35,18 +44,18 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          bundle exec cap staging deploy
+          bundle exec cap staging deploy REGION=${{ github.event.inputs.region }}
 
       - name: DB migration
         if: ${{ success() }}
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          bundle exec cap staging deploy:migrate
+          bundle exec cap staging deploy:migrate REGION=${{ github.event.inputs.region }}
 
       - name: Restart server
         if: ${{ success() }}
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          bundle exec cap staging deploy:restart
+          bundle exec cap staging deploy:restart REGION=${{ github.event.inputs.region }}

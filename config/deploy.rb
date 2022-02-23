@@ -86,4 +86,16 @@ namespace :deploy do
     end
   end
 
+  task :resque_restart do
+    on roles(:job) do
+      within "#{fetch(:deploy_to)}/current/" do
+        with RAILS_ENV: fetch(:environment) do
+          execute :rake, "resque:restart_workers"
+          execute :rake, "resque:restart_scheduler"
+        end
+        execute "echo `ps aux | grep [r]esque | grep -v grep | cut -c 10-16`"
+      end
+    end
+  end
+
 end

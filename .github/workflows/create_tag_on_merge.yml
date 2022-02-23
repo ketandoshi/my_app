@@ -1,16 +1,21 @@
-name: Create tag on develop
-
-on:
+on: 
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  release_on_push:
+  release-on-push:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  steps:
-    - uses: rymndhng/release-on-push-action@v0.20.0
-      with:
-        bump_version_scheme: minor
+    steps:
+      - id: release
+        uses: rymndhng/release-on-push-action@master
+        with:
+          bump_version_scheme: minor
+          tag_prefix: v
+          
+      - name: Check Output Parameters
+        run: |
+          echo "Got tag name ${{ steps.release.outputs.tag_name }}"
+          echo "Got release version ${{ steps.release.outputs.version }}"

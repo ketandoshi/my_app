@@ -11,6 +11,6 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   steps:
-    - uses: rymndhng/release-on-push-action@v0.23.0
+    - uses: rymndhng/release-on-push-action@v0.22.0
       with:
         bump_version_scheme: minor

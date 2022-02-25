@@ -64,6 +64,8 @@ set :environment, 'staging'
 
 set :deploy_to, "/home/deploy_user/capistrano/#{fetch :application}"
 
+puts "ENV_REGION--#{ENV.inspect}"
+
 # Check if region is mentioned. Else throw exception.
 unless ["sg", "hk", "my", "all"].include?(ENV["REGION"].to_s.downcase)
   puts "  * !!!!!!!!!!!"

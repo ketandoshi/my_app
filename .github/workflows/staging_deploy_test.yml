@@ -62,7 +62,7 @@ jobs:
     env:
       STAGING_SERVER_IP_ONE: ${{ secrets.SG_STAGING_SERVER_IP_ONE }}
       STAGING_SERVER_IP_TWO: ${{ secrets.SG_STAGING_SERVER_IP_TWO }}
-      ${{ toJSON(github.event.inputs) }}
+      eval "${{ toJSON(github.event.inputs) }}"
 
     steps:
       - name: Install Github actions key to runner

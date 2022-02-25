@@ -16,11 +16,11 @@ on:
         description: 'xxt-all'
         required: false
         type: boolean
-      xxt_sg:
+      region:
         description: 'xxt-sg'
         required: false
         type: boolean
-      xxt_my:
+      region:
         description: 'xxt-my'
         required: false
         type: boolean

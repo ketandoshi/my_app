@@ -70,6 +70,7 @@ unless ["sg", "hk", "my", "all"].include?(ENV["REGION"].to_s.downcase)
   puts "  * Error: Please mention REGION=[sg|hk|my|all] at the end."
   puts "  * Usage: cap staging deploy REGION=sg"
   puts "  * !!!!!!!!!!!"
+  raise "No region provided!"
   exit
 end
 

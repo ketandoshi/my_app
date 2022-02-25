@@ -21,27 +21,27 @@ on:
         required: false
         type: boolean
       xxt_my:
-        description: 'xxt_my'
+        description: 'xxt-my'
         required: false
         type: boolean
       xxt_hk:
-        description: 'xxt_hk'
+        description: 'xxt-hk'
         required: false
         type: boolean
       xxtup_all:
-        description: 'xxtup_all'
+        description: 'xxtup-all'
         required: false
         type: boolean
       xxtup_sg:
-        description: 'xxtup_sg'
+        description: 'xxtup-sg'
         required: false
         type: boolean
       xxtup_my:
-        description: 'xxtup_my'
+        description: 'xxtup-my'
         required: false
         type: boolean
       xxtup_hk:
-        description: 'xxtup_hk'
+        description: 'xxtup-hk'
         required: false
         type: boolean
       sandbox2:

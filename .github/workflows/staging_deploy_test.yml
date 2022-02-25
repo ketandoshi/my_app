@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
     branches: [ main ]
     inputs:
-      region:
-        type: choice
-        description: Select region
-        options:
-        - ALL
-        - SG
-        - HK
-        - MY
+#      region:
+#        type: choice
+#        description: Select region
+#        options:
+#        - ALL
+#        - SG
+#        - HK
+#        - MY
       xxt_all:
         description: 'xxt-all'
         required: false

@@ -84,7 +84,7 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          bundle exec cap staging deploy REGION=${{ github.event.inputs }}
+          bundle exec cap staging deploy REGION=${{ toJSON(github.event.inputs) }}
 
       - name: DB migration
         if: ${{ success() }}

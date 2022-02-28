@@ -56,6 +56,16 @@ namespace :deploy do
     end
   end
 
+  task :migrate do
+    on roles(:db) do
+      within "#{fetch(:deploy_to)}/current/" do
+        with RAILS_ENV: fetch(:environment) do
+          execute :rake, "db:seed"
+        end
+      end
+    end
+  end
+
   task :restart do
     on roles(:web) do
       within "#{fetch(:deploy_to)}/current/" do

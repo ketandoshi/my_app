@@ -87,8 +87,12 @@ set :ssh_options, {
 # Set servers
 if ENV["XXT_ALL"] == "true" || ENV["XXT_SG"] == "true"
   server ENV.fetch('STAGING_SERVER_IP_ONE'), roles: %w{web app db script job}
-elsif ENV["XXT_ALL"] == "true" || ENV["XXT_MY"] == "true"
+end
+
+if ENV["XXT_ALL"] == "true" || ENV["XXT_MY"] == "true"
   server ENV.fetch('STAGING_SERVER_IP_TWO'), roles: %w{web app db script job}
-elsif ENV["XXT_ALL"] == "true" || ENV["XXT_HK"] == "true"
+end
+
+if ENV["XXT_ALL"] == "true" || ENV["XXT_HK"] == "true"
   #
 end

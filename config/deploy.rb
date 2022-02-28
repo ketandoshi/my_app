@@ -13,8 +13,8 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 # set :deploy_to, "/var/www/my_app_name"
 
 # Default value for :format is :airbrussh.
-set :format, :airbrussh
-# set :format, :pretty
+# set :format, :airbrussh
+set :format, :pretty
 
 # You can configure the Airbrussh format using :format_options.
 # These are the defaults.

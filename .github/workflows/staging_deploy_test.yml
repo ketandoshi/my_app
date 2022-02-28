@@ -4,14 +4,6 @@ on:
   workflow_dispatch:
     branches: [ main ]
     inputs:
-#      region:
-#        type: choice
-#        description: Select region
-#        options:
-#        - ALL
-#        - SG
-#        - HK
-#        - MY
       xxt_all:
         description: 'xxt-all'
         required: false
@@ -60,9 +52,20 @@ jobs:
     concurrency: staging_environment
     environment: staging
     env:
+      # Servers
       STAGING_SERVER_IP_ONE: ${{ secrets.SG_STAGING_SERVER_IP_ONE }}
       STAGING_SERVER_IP_TWO: ${{ secrets.SG_STAGING_SERVER_IP_TWO }}
-      INPUT_PARAMS: ${{ (github.event.inputs) }}
+      # User inputs
+      XXT_ALL: ${{ github.event.inputs.xxt_all }}
+      XXT_SG: ${{ github.event.inputs.xxt_sg }}
+      XXT_MY: ${{ github.event.inputs.xxt_my }}
+      XXT_HK: ${{ github.event.inputs.xxt_hk }}
+      XXTUP_ALL: ${{ github.event.inputs.xxtup_all }}
+      XXTUP_SG: ${{ github.event.inputs.xxtup_sg }}
+      XXTUP_MY: ${{ github.event.inputs.xxtup_my }}
+      XXTUP_HK: ${{ github.event.inputs.xxtup_hk }}
+      SANDBOX2: ${{ github.event.inputs.sandbox2 }}
+      SGSCAN: ${{ github.event.inputs.sgscan }}
 
     steps:
       - name: Install Github actions key to runner

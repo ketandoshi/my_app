@@ -12,43 +12,43 @@ on:
 #        - SG
 #        - HK
 #        - MY
-      XXT_ALL:
+      xxt_all:
         description: 'xxt-all'
         required: false
         type: boolean
-      XXT_SG:
+      xxt_sg:
         description: 'xxt-sg'
         required: false
         type: boolean
-      XXT_MY:
+      xxt_my:
         description: 'xxt-my'
         required: false
         type: boolean
-      XXT_HK:
+      xxt_hk:
         description: 'xxt-hk'
         required: false
         type: boolean
-      XXTUP_ALL:
+      xxtup_all:
         description: 'xxtup-all'
         required: false
         type: boolean
-      XXTUP_SG:
+      xxtup_sg:
         description: 'xxtup-sg'
         required: false
         type: boolean
-      XXTUP_MY:
+      xxtup_my:
         description: 'xxtup-my'
         required: false
         type: boolean
-      XXTUP_HK:
+      xxtup_hk:
         description: 'xxtup-hk'
         required: false
         type: boolean
-      SANDBOX2:
+      sandbox2:
         description: 'sandbox2'
         required: false
         type: boolean
-      SGSCAN:
+      sgscan:
         description: 'sgscan'
         required: false
         type: boolean
@@ -80,7 +80,19 @@ jobs:
           ruby-version: 2.6.6
           bundler-cache: true
 
+      - name: Set env vars
+      - run: |
+          user_params = ${{ toJSON(github.event.inputs) }}
+          for KEY in user_params; do
+            # Print the KEY value
+            echo "Key: $KEY"
+            # Print the VALUE attached to that KEY
+            echo "Value: ${ARRAY[$KEY]}"
+            echo "$KEY=${user_params[$KEY]}" >> $GITHUB_ENV
+          done
+
       - name: Deploy to staging
+        if: ${{ success() }}
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions

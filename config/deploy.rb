@@ -56,7 +56,7 @@ namespace :deploy do
     end
   end
 
-  task :migrate do
+  task :seed do
     on roles(:db) do
       within "#{fetch(:deploy_to)}/current/" do
         with RAILS_ENV: fetch(:environment) do

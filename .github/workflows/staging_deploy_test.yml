@@ -40,8 +40,12 @@ on:
         description: 'sandbox2'
         required: false
         type: boolean
-      sgscan:
-        description: 'sgscan'
+      #sgscan:
+        #description: 'sgscan'
+        #required: false
+        #type: boolean
+      seed:
+        description: 'Execute Seed?'
         required: false
         type: boolean
 
@@ -85,7 +89,6 @@ jobs:
           bundler-cache: true
 
       - name: Deploy to staging
-        if: ${{ success() }}
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
@@ -97,6 +100,13 @@ jobs:
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
           bundle exec cap staging deploy:migrate
+
+      - name: DB seed
+        if: ${{ github.event.inputs.seed == "true" }}
+        run: |
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/github-actions
+          bundle exec cap staging deploy:seed
 
       - name: Restart server
         if: ${{ success() }}

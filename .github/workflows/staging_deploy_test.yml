@@ -84,27 +84,23 @@ jobs:
           ruby-version: 2.6.6
           bundler-cache: true
 
-      - name: Set env vars
-        run: |
-          USER_PARAMS="${{ toJSON(github.event.inputs) }}"
-
       - name: Deploy to staging
         if: ${{ success() }}
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          bundle exec cap staging deploy ${{ toJSON(github.event.inputs) }}
+          bundle exec cap staging deploy
 
       - name: DB migration
         if: ${{ success() }}
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          bundle exec cap staging deploy:migrate REGION=${{ github.event.inputs.region }}
+          bundle exec cap staging deploy:migrate
 
       - name: Restart server
         if: ${{ success() }}
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          bundle exec cap staging deploy:restart REGION=${{ github.event.inputs.region }}
+          bundle exec cap staging deploy:restart

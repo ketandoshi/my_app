@@ -60,21 +60,22 @@
 #     # password: "please use keys"
 #   }
 
-set :environment, 'staging'
-
-set :deploy_to, "/home/deploy_user/capistrano/#{fetch :application}"
-
-puts "ENV_REGION--#{ENV.inspect}"
-
 # Check if region is mentioned. Else throw exception.
-unless ["sg", "hk", "my", "all"].include?(ENV["REGION"].to_s.downcase)
+unless ENV.has_key?("XXT_ALL") || ENV.has_key?("XXT_SG") || ENV.has_key?("XXT_MY") || ENV.has_key?("XXT_HK") ||
+    ENV.has_key?("XXTUP_ALL") || ENV.has_key?("XXTUP_SG") || ENV.has_key?("XXTUP_MY") || ENV.has_key?("XXTUP_HK") ||
+    ENV.has_key?("SANDBOX2") || ENV.has_key?("SGSCAN")
   puts "  * !!!!!!!!!!!"
-  puts "  * Error: Please mention REGION=[sg|hk|my|all] at the end."
-  puts "  * Usage: cap staging deploy REGION=sg"
+  puts "  * Error: Please provide target region."
+  puts "  * Usage: cap staging deploy XXT_ALL=true"
   puts "  * !!!!!!!!!!!"
   raise "No region provided!"
   exit
 end
+
+set :environment, 'staging'
+
+set :deploy_to, "/home/deploy_user/capistrano/#{fetch :application}"
+
 
 set :ssh_options, {
   user: "deploy_user",
@@ -84,13 +85,10 @@ set :ssh_options, {
 }
 
 # Set servers
-if ENV["REGION"].downcase == "sg"
+if ENV["XXT_ALL"] == "true" || ENV["XXT_SG"] == "true"
   server ENV.fetch('STAGING_SERVER_IP_ONE'), roles: %w{web app db script job}
-elsif ENV["REGION"].downcase == "hk"
+elsif ENV["XXT_ALL"] == "true" || ENV["XXT_MY"] == "true"
   server ENV.fetch('STAGING_SERVER_IP_TWO'), roles: %w{web app db script job}
-elsif ENV["REGION"].downcase == "my"
+elsif ENV["XXT_ALL"] == "true" || ENV["XXT_HK"] == "true"
   #
-elsif ENV["REGION"].downcase == "all"
-  server ENV.fetch('STAGING_SERVER_IP_ONE'), roles: %w{web app db script job}
-  server ENV.fetch('STAGING_SERVER_IP_TWO'), roles: %w{web app db script job}
 end

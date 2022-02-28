@@ -82,13 +82,13 @@ jobs:
 
       - name: Set env vars
         run: |
-          user_params = ${{ toJSON(github.event.inputs) }}
+          USER_PARAMS = ${{ toJSON(github.event.inputs) }}
           for KEY in user_params; do
             # Print the KEY value
             echo "Key: $KEY"
             # Print the VALUE attached to that KEY
             echo "Value: ${ARRAY[$KEY]}"
-            echo "$KEY=${user_params[$KEY]}" >> $GITHUB_ENV
+            echo "$KEY=${USER_PARAMS[$KEY]}" >> $GITHUB_ENV
           done
 
       - name: Deploy to staging

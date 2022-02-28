@@ -82,12 +82,12 @@ jobs:
 
       - name: Set env vars
         run: |
-          USER_PARAMS = ${{ toJSON(github.event.inputs) }}
+          USER_PARAMS = eval "${{ toJSON(github.event.inputs) }}"
           for KEY in USER_PARAMS; do
             # Print the KEY value
             echo "Key: $KEY"
             # Print the VALUE attached to that KEY
-            echo "Value: ${ARRAY[$KEY]}"
+            echo "Value: ${USER_PARAMS[$KEY]}"
             echo "$KEY=${USER_PARAMS[$KEY]}" >> $GITHUB_ENV
           done
 

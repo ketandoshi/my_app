@@ -82,7 +82,7 @@ jobs:
 
       - name: Set env vars
         run: |
-          USER_PARAMS=eval "${{ (github.event.inputs) }}"
+          USER_PARAMS="${{ toJSON(github.event.inputs) }}"
 
       - name: Deploy to staging
         if: ${{ success() }}

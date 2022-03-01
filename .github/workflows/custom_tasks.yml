@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       task_name:
-        description: 'Provide name of the task (eg: custom_task:create_sample_articles)'
+        description: 'Provide name of the task with namespace (eg: custom_task:create_sample_articles)'
         required: true
       xxt_all:
         description: 'xxt-all'

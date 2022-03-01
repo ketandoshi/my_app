@@ -9,13 +9,46 @@ on:
         description: 'Provide name of the task (eg: custom_task:create_sample_articles)'
         required: true
       region:
-        type: choice
-        description: Select region
-        options:
-        - ALL
-        - SG
-        - HK
-        - MY
+        xxt_all:
+          description: 'xxt-all'
+          required: false
+          type: boolean
+        xxt_sg:
+          description: 'xxt-sg'
+          required: false
+          type: boolean
+        xxt_my:
+          description: 'xxt-my'
+          required: false
+          type: boolean
+        xxt_hk:
+          description: 'xxt-hk'
+          required: false
+          type: boolean
+        xxtup_all:
+          description: 'xxtup-all'
+          required: false
+          type: boolean
+        xxtup_sg:
+          description: 'xxtup-sg'
+          required: false
+          type: boolean
+        xxtup_my:
+          description: 'xxtup-my'
+          required: false
+          type: boolean
+        xxtup_hk:
+          description: 'xxtup-hk'
+          required: false
+          type: boolean
+        sandbox2:
+          description: 'sandbox2'
+          required: false
+          type: boolean
+        #sgscan:
+          #description: 'sgscan'
+          #required: false
+          #type: boolean
 
 jobs:
   execute_task:
@@ -24,8 +57,20 @@ jobs:
     concurrency: staging_environment
     environment: staging
     env:
+      # Servers
       STAGING_SERVER_IP_ONE: ${{ secrets.SG_STAGING_SERVER_IP_ONE }}
       STAGING_SERVER_IP_TWO: ${{ secrets.SG_STAGING_SERVER_IP_TWO }}
+      # User inputs
+      XXT_ALL: ${{ github.event.inputs.xxt_all }}
+      XXT_SG: ${{ github.event.inputs.xxt_sg }}
+      XXT_MY: ${{ github.event.inputs.xxt_my }}
+      XXT_HK: ${{ github.event.inputs.xxt_hk }}
+      XXTUP_ALL: ${{ github.event.inputs.xxtup_all }}
+      XXTUP_SG: ${{ github.event.inputs.xxtup_sg }}
+      XXTUP_MY: ${{ github.event.inputs.xxtup_my }}
+      XXTUP_HK: ${{ github.event.inputs.xxtup_hk }}
+      SANDBOX2: ${{ github.event.inputs.sandbox2 }}
+      #SGSCAN: ${{ github.event.inputs.sgscan }}
 
     steps:
       - name: Install Github actions key to runner
@@ -49,4 +94,4 @@ jobs:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          bundle exec cap staging deploy:execute_onetimer["${{ github.event.inputs.task_name }}"] REGION=${{ github.event.inputs.region }}
+          bundle exec cap staging deploy:execute_onetimer["${{ github.event.inputs.task_name }}"]

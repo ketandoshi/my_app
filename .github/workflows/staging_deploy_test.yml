@@ -69,7 +69,7 @@ jobs:
       XXTUP_MY: ${{ github.event.inputs.xxtup_my }}
       XXTUP_HK: ${{ github.event.inputs.xxtup_hk }}
       SANDBOX2: ${{ github.event.inputs.sandbox2 }}
-      SGSCAN: ${{ github.event.inputs.sgscan }}
+      #SGSCAN: ${{ github.event.inputs.sgscan }}
 
     steps:
       - name: Install Github actions key to runner

@@ -8,47 +8,46 @@ on:
       task_name:
         description: 'Provide name of the task (eg: custom_task:create_sample_articles)'
         required: true
-      region:
-        xxt_all:
-          description: 'xxt-all'
-          required: false
-          type: boolean
-        xxt_sg:
-          description: 'xxt-sg'
-          required: false
-          type: boolean
-        xxt_my:
-          description: 'xxt-my'
-          required: false
-          type: boolean
-        xxt_hk:
-          description: 'xxt-hk'
-          required: false
-          type: boolean
-        xxtup_all:
-          description: 'xxtup-all'
-          required: false
-          type: boolean
-        xxtup_sg:
-          description: 'xxtup-sg'
-          required: false
-          type: boolean
-        xxtup_my:
-          description: 'xxtup-my'
-          required: false
-          type: boolean
-        xxtup_hk:
-          description: 'xxtup-hk'
-          required: false
-          type: boolean
-        sandbox2:
-          description: 'sandbox2'
-          required: false
-          type: boolean
-        #sgscan:
-          #description: 'sgscan'
-          #required: false
-          #type: boolean
+      xxt_all:
+        description: 'xxt-all'
+        required: false
+        type: boolean
+      xxt_sg:
+        description: 'xxt-sg'
+        required: false
+        type: boolean
+      xxt_my:
+        description: 'xxt-my'
+        required: false
+        type: boolean
+      xxt_hk:
+        description: 'xxt-hk'
+        required: false
+        type: boolean
+      xxtup_all:
+        description: 'xxtup-all'
+        required: false
+        type: boolean
+      xxtup_sg:
+        description: 'xxtup-sg'
+        required: false
+        type: boolean
+      xxtup_my:
+        description: 'xxtup-my'
+        required: false
+        type: boolean
+      xxtup_hk:
+        description: 'xxtup-hk'
+        required: false
+        type: boolean
+      sandbox2:
+        description: 'sandbox2'
+        required: false
+        type: boolean
+      #sgscan:
+        #description: 'sgscan'
+        #required: false
+        #type: boolean
 
 jobs:
   execute_task:

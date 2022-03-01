@@ -102,7 +102,7 @@ jobs:
           bundle exec cap staging deploy:migrate
 
       - name: DB seed
-        if: ${{ github.event.inputs.seed }}
+        if: ${{ github.event.inputs.seed == 'true' }}
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions

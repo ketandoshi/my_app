@@ -41,7 +41,7 @@ on:
         required: false
         type: boolean
       sgscan_core:
-        description: "sgscan-core \n New line"
+        description: "sgscan-core <br> New line"
         required: false
         type: boolean
 #      seed:

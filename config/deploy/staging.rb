@@ -61,14 +61,24 @@
 #   }
 
 # Check if region is mentioned. Else throw exception.
-unless ENV.has_key?("XXT_ALL") || ENV.has_key?("XXT_SG") || ENV.has_key?("XXT_MY") || ENV.has_key?("XXT_HK") ||
-    ENV.has_key?("XXTUP_ALL") || ENV.has_key?("XXTUP_SG") || ENV.has_key?("XXTUP_MY") || ENV.has_key?("XXTUP_HK") ||
-    ENV.has_key?("SANDBOX2") || ENV.has_key?("SGSCAN")
+target_keys = ["XXT_ALL", "SGT", "MYT", "HKT", "XXTUP_ALL", "SGTUP", "MYTUP", "HKTUP", "SANDBOX2", "SGSCAN"]
+target_provided = false
+
+target_keys.each do |target_key|
+  if ENV.key?(target_key)
+    target_provided = true
+    break
+  end
+end
+
+unless target_provided
+  puts "\n\n"
   puts "  * !!!!!!!!!!!"
-  puts "  * Error: Please provide target region."
-  puts "  * Usage: cap staging deploy XXT_ALL=true"
+  puts "  * ERROR: Please provide target region."
+  puts "  * Usage: cap staging deploy SGT=true..."
   puts "  * !!!!!!!!!!!"
-  raise "No region provided!"
+  puts "\n\n"
+  raise "No target region provided!"
   exit
 end
 
@@ -85,14 +95,14 @@ set :ssh_options, {
 }
 
 # Set servers
-if ENV["XXT_ALL"] == "true" || ENV["XXT_SG"] == "true"
+if ENV["XXT_ALL"] == "true" || ENV["SGT"] == "true"
   server ENV.fetch('STAGING_SERVER_IP_ONE'), roles: %w{web app db script job}
 end
 
-if ENV["XXT_ALL"] == "true" || ENV["XXT_MY"] == "true"
+if ENV["XXT_ALL"] == "true" || ENV["MYT"] == "true"
   server ENV.fetch('STAGING_SERVER_IP_TWO'), roles: %w{web app db script job}
 end
 
-if ENV["XXT_ALL"] == "true" || ENV["XXT_HK"] == "true"
+if ENV["XXT_ALL"] == "true" || ENV["HKT"] == "true"
   #
 end

@@ -69,19 +69,19 @@ namespace :deploy do
   task :restart do
     on roles(:web) do
       within "#{fetch(:deploy_to)}/current/" do
+        execute "echo `restarting server`"
         execute "sudo service nginx reload"
       end
     end
   end
 
   task :execute_custom_task, :task_name do |t, args|
-    on roles(:script) do
-      within "#{fetch(:deploy_to)}/current/" do
-        with RAILS_ENV: fetch(:environment) do
-          if args[:task_name] == 'restart'
-            # execute "sudo service nginx reload"
-            Rake::Task["deploy:restart"].invoke
-          else
+    if args[:task_name] == 'restart'
+      Rake::Task["deploy:restart"].invoke
+    else
+      on roles(:script) do
+        within "#{fetch(:deploy_to)}/current/" do
+          with RAILS_ENV: fetch(:environment) do
             execute :rake, args[:task_name]
           end
         end

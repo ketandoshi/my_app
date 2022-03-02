@@ -79,7 +79,8 @@ namespace :deploy do
       within "#{fetch(:deploy_to)}/current/" do
         with RAILS_ENV: fetch(:environment) do
           if args[:task_name] == 'restart'
-            execute "sudo service nginx reload"
+            # execute "sudo service nginx reload"
+            Rake::Task[:restart].invoke
           else
             execute :rake, args[:task_name]
           end

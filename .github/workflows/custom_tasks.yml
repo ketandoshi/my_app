@@ -8,46 +8,46 @@ on:
       task_name:
         description: 'Provide name of the task with namespace (eg: custom_task:create_sample_articles)'
         required: true
-      xxt_all:
-        description: 'xxt-all'
+#      xxt_all:
+#        description: 'xxt-all'
+#        required: false
+#        type: boolean
+      sgt_core:
+        description: 'sgt-core'
         required: false
         type: boolean
-      xxt_sg:
-        description: 'xxt-sg'
+      myt_core:
+        description: 'myt-core'
         required: false
         type: boolean
-      xxt_my:
-        description: 'xxt-my'
+      hkt_core:
+        description: 'hkt-core'
         required: false
         type: boolean
-      xxt_hk:
-        description: 'xxt-hk'
+#      xxtup_all:
+#        description: 'xxtup-all'
+#        required: false
+#        type: boolean
+      sgtup_core:
+        description: 'sgtup-core'
         required: false
         type: boolean
-      xxtup_all:
-        description: 'xxtup-all'
+      mytup_core:
+        description: 'mytup-core'
         required: false
         type: boolean
-      xxtup_sg:
-        description: 'xxtup-sg'
+      hktup_core:
+        description: 'hktup-core'
         required: false
         type: boolean
-      xxtup_my:
-        description: 'xxtup-my'
+      sandbox2_core:
+        description: 'sandbox2.cardup.co'
         required: false
         type: boolean
-      xxtup_hk:
-        description: 'xxtup-hk'
+      sgscan_core:
+        description: "sgscan-core ____________________________________[Note: this workflow would do the deployment only. After that, you need to execute 'db:seed','restart' as a Custom tasks]"
         required: false
         type: boolean
-      sandbox2:
-        description: 'sandbox2'
-        required: false
-        type: boolean
-      #sgscan:
-        #description: 'sgscan'
-        #required: false
-        #type: boolean
 
 jobs:
   execute_task:
@@ -60,16 +60,16 @@ jobs:
       STAGING_SERVER_IP_ONE: ${{ secrets.SG_STAGING_SERVER_IP_ONE }}
       STAGING_SERVER_IP_TWO: ${{ secrets.SG_STAGING_SERVER_IP_TWO }}
       # User inputs
-      XXT_ALL: ${{ github.event.inputs.xxt_all }}
-      XXT_SG: ${{ github.event.inputs.xxt_sg }}
-      XXT_MY: ${{ github.event.inputs.xxt_my }}
-      XXT_HK: ${{ github.event.inputs.xxt_hk }}
-      XXTUP_ALL: ${{ github.event.inputs.xxtup_all }}
-      XXTUP_SG: ${{ github.event.inputs.xxtup_sg }}
-      XXTUP_MY: ${{ github.event.inputs.xxtup_my }}
-      XXTUP_HK: ${{ github.event.inputs.xxtup_hk }}
-      SANDBOX2: ${{ github.event.inputs.sandbox2 }}
-      #SGSCAN: ${{ github.event.inputs.sgscan }}
+      #XXT_ALL: ${{ github.event.inputs.xxt_all }}
+      SGT: ${{ github.event.inputs.sgt_core }}
+      MYT: ${{ github.event.inputs.myt_core }}
+      HKT: ${{ github.event.inputs.hkt_core }}
+      #XXTUP_ALL: ${{ github.event.inputs.xxtup_all }}
+      SGTUP: ${{ github.event.inputs.sgtup_core }}
+      MYTUP: ${{ github.event.inputs.mytup_core }}
+      HKTUP: ${{ github.event.inputs.hktup_core }}
+      SANDBOX2: ${{ github.event.inputs.sandbox2_core }}
+      SGSCAN: ${{ github.event.inputs.sgscan_core }}
 
     steps:
       - name: Install Github actions key to runner

@@ -41,7 +41,7 @@ on:
         required: false
         type: boolean
       sgscan_core:
-        description: "sgscan-core                          [Note: this workflow would do the deployment only. After deployment, you need to execute 'db:seed', 'restart' from Custom tasks]"
+        description: "sgscan-core [Note: this workflow would do the deployment only. After that, you need to execute 'db:seed','restart' as a Custom tasks]"
         required: false
         type: boolean
 #      seed:

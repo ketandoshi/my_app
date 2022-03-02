@@ -1,4 +1,5 @@
 name: Staging - Deploy To staging
+description: 'test description'
 
 on:
   workflow_dispatch:

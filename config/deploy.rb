@@ -76,8 +76,8 @@ namespace :deploy do
   end
 
   task :execute_custom_task, :task_name do |t, args|
-    if args[:task_name] == 'restart'
-      Rake::Task["deploy:restart"].invoke
+    if ["restart"].include?(args[:task_name])
+      Rake::Task["deploy:#{args[:task_name]}"].invoke
     else
       on roles(:script) do
         within "#{fetch(:deploy_to)}/current/" do

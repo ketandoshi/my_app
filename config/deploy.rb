@@ -69,7 +69,7 @@ namespace :deploy do
   task :restart do
     on roles(:web) do
       within "#{fetch(:deploy_to)}/current/" do
-        execute "echo `restarting server`"
+        puts "restarting server"
         execute "sudo service nginx reload"
       end
     end

@@ -74,7 +74,7 @@ namespace :deploy do
     end
   end
 
-  task :execute_onetimer, :task_name do |t, args|
+  task :execute_custom_task, :task_name do |t, args|
     on roles(:script) do
       within "#{fetch(:deploy_to)}/current/" do
         with RAILS_ENV: fetch(:environment) do

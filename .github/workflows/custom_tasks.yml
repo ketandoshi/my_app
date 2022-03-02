@@ -88,9 +88,9 @@ jobs:
           ruby-version: 2.6.6
           bundler-cache: true
 
-      - name: Executing custom task on staging
+      - name: Executing custom task on staging: - ${{ github.event.inputs.task_name }}
         working-directory:
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/github-actions
-          bundle exec cap staging deploy:execute_onetimer["${{ github.event.inputs.task_name }}"]
+          bundle exec cap staging deploy:execute_custom_task["${{ github.event.inputs.task_name }}"]

@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
     branches: [ main ]
     inputs:
-      xxt_all:
-        description: 'xxt-all'
-        required: false
-        type: boolean
+#      xxt_all:
+#        description: 'xxt-all'
+#        required: false
+#        type: boolean
       xxt_sg:
         description: 'xxt-sg'
         required: false
@@ -20,10 +20,10 @@ on:
         description: 'xxt-hk'
         required: false
         type: boolean
-      xxtup_all:
-        description: 'xxtup-all'
-        required: false
-        type: boolean
+#      xxtup_all:
+#        description: 'xxtup-all'
+#        required: false
+#        type: boolean
       xxtup_sg:
         description: 'xxtup-sg'
         required: false
@@ -40,14 +40,14 @@ on:
         description: 'sandbox2'
         required: false
         type: boolean
-      #sgscan:
-        #description: 'sgscan'
-        #required: false
-        #type: boolean
-      seed:
-        description: 'Execute Seed?'
+      sgscan:
+        description: 'sgscan'
         required: false
         type: boolean
+#      seed:
+#        description: 'Execute Seed?'
+#        required: false
+#        type: boolean
 
 jobs:
   deploy:
@@ -94,23 +94,23 @@ jobs:
           ssh-add ~/.ssh/github-actions
           bundle exec cap staging deploy
 
-      - name: DB migration
-        if: ${{ success() }}
-        run: |
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/github-actions
-          bundle exec cap staging deploy:migrate
-
-      - name: DB seed
-        if: ${{ github.event.inputs.seed == 'true' }}
-        run: |
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/github-actions
-          bundle exec cap staging deploy:seed
-
-      - name: Restart server
-        if: ${{ success() }}
-        run: |
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/github-actions
-          bundle exec cap staging deploy:restart
+#      - name: DB migration
+#        if: ${{ success() }}
+#        run: |
+#          eval "$(ssh-agent -s)"
+#          ssh-add ~/.ssh/github-actions
+#          bundle exec cap staging deploy:migrate
+#
+#      - name: DB seed
+#        if: ${{ github.event.inputs.seed == 'true' }}
+#        run: |
+#          eval "$(ssh-agent -s)"
+#          ssh-add ~/.ssh/github-actions
+#          bundle exec cap staging deploy:seed
+#
+#      - name: Restart server
+#        if: ${{ success() }}
+#        run: |
+#          eval "$(ssh-agent -s)"
+#          ssh-add ~/.ssh/github-actions
+#          bundle exec cap staging deploy:restart

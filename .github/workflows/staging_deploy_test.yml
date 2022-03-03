@@ -37,7 +37,7 @@ on:
         required: false
         type: boolean
       server_restart:
-        description: 'Server Restart'
+        description: 'Server Restart?'
         required: false
         type: boolean
 

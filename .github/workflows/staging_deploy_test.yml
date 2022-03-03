@@ -100,7 +100,7 @@ jobs:
 #          ssh-add ~/.ssh/github-actions
 #          bundle exec cap staging deploy:seed
 #
-      - name: Restart server
+      - name: Restart server - Conditional
         if: ${{ success() }} && ${{ github.event.inputs.server_restart == 'true' }}
         run: |
           eval "$(ssh-agent -s)"

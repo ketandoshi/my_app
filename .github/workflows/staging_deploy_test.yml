@@ -4,10 +4,6 @@ on:
   workflow_dispatch:
     branches: [ main ]
     inputs:
-#      xxt_all:
-#        description: 'xxt-all'
-#        required: false
-#        type: boolean
       sgt_core:
         description: 'sgt-core'
         required: false
@@ -20,10 +16,6 @@ on:
         description: 'hkt-core'
         required: false
         type: boolean
-#      xxtup_all:
-#        description: 'xxtup-all'
-#        required: false
-#        type: boolean
       sgtup_core:
         description: 'sgtup-core'
         required: false
@@ -44,10 +36,10 @@ on:
         description: "sgscan-core ____________________________________[Note: this workflow would do the deployment only. After that, you need to execute 'db:seed','restart' as a Custom tasks]"
         required: false
         type: boolean
-#      seed:
-#        description: 'Execute Seed?'
-#        required: false
-#        type: boolean
+      server_restart:
+        description: 'Server Restart'
+        required: false
+        type: boolean
 
 jobs:
   deploy:
@@ -108,9 +100,9 @@ jobs:
 #          ssh-add ~/.ssh/github-actions
 #          bundle exec cap staging deploy:seed
 #
-#      - name: Restart server
-#        if: ${{ success() }}
-#        run: |
-#          eval "$(ssh-agent -s)"
-#          ssh-add ~/.ssh/github-actions
-#          bundle exec cap staging deploy:restart
+      - name: Restart server
+        if: ${{ success() }} && ${{ github.event.inputs.server_restart == 'true' }}
+        run: |
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/github-actions
+          bundle exec cap staging deploy:restart

@@ -50,7 +50,6 @@ jobs:
     runs-on: ubuntu-latest
     concurrency: staging_environment
     environment: staging
-    if: github.event.inputs.secret_key == ${{ secrets.STAGING_SECRET_KEY }}
     env:
       # Servers
       STAGING_SERVER_IP_ONE: ${{ secrets.SG_STAGING_SERVER_IP_ONE }}
@@ -67,6 +66,7 @@ jobs:
       SANDBOX2: ${{ github.event.inputs.sandbox2_core }}
       SGSCAN: ${{ github.event.inputs.sgscan_core }}
 
+    if: github.event.inputs.secret_key == ${{ secrets.STAGING_SECRET_KEY }}
     steps:
       - name: Install Github actions key to runner
         uses: shimataro/ssh-key-action@v2

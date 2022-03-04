@@ -67,7 +67,7 @@ jobs:
 
   deploy:
     needs:
-      - secrets-gate
+      - check_authentication
     name: Capistrano Deploy to Staging Server
     runs-on: ubuntu-latest
     concurrency: staging_environment

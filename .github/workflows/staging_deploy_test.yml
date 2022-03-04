@@ -58,7 +58,7 @@ jobs:
     needs:
       - secrets-gate
     #if: ${{ needs.secrets-gate.outputs.staging_secret_key == github.event.inputs.secret_key }}
-    if: ${{ needs.secrets-gate.outputs.secret_key_valid }}
+    if: ${{ needs.secrets-gate.outputs.secret_key_valid == 'true' }}
     name: Capistrano Deploy to Staging Server
     runs-on: ubuntu-latest
     concurrency: staging_environment

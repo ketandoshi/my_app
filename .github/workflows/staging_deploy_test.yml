@@ -67,7 +67,7 @@ jobs:
 
   deploy:
     needs:
-      - check_authentication
+      - authenticator
     name: Capistrano Deploy to Staging Server
     runs-on: ubuntu-latest
     concurrency: staging_environment

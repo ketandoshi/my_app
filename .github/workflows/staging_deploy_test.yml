@@ -46,6 +46,7 @@ on:
 
 jobs:
   deploy:
+    if: github.event.inputs.secret_key == secrets.STAGING_SECRET_KEY
     name: Capistrano Deploy to Staging Server
     runs-on: ubuntu-latest
     concurrency: staging_environment
@@ -67,7 +68,6 @@ jobs:
       SGSCAN: ${{ github.event.inputs.sgscan_core }}
 
     steps:
-      if: ${{ github.event.inputs.secret_key == secrets.STAGING_SECRET_KEY }}
       - name: Install Github actions key to runner
         uses: shimataro/ssh-key-action@v2
         with:

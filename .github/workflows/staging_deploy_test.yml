@@ -46,11 +46,11 @@ on:
 
 jobs:
   deploy:
-    if: github.event.inputs.secret_key == ${{ secrets.STAGING_SECRET_KEY }}
     name: Capistrano Deploy to Staging Server
     runs-on: ubuntu-latest
     concurrency: staging_environment
     environment: staging
+    if: github.event.inputs.secret_key == ${{ secrets.STAGING_SECRET_KEY }}
     env:
       # Servers
       STAGING_SERVER_IP_ONE: ${{ secrets.SG_STAGING_SERVER_IP_ONE }}

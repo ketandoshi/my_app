@@ -66,8 +66,8 @@ jobs:
       staging_secret_key: ${{ secrets.STAGING_SECRET_KEY }}
 
   deploy:
-#    needs:
-#      - secrets-gate
+    needs:
+      - secrets-gate
     name: Capistrano Deploy to Staging Server
     runs-on: ubuntu-latest
     concurrency: staging_environment

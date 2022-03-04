@@ -45,22 +45,29 @@ on:
         required: true
 
 jobs:
-  secrets-gate:
-    runs-on: ubuntu-latest
-    outputs:
-      secret_key_valid: ${{ steps.check_secrets.outputs.secret_key_valid }}
-    steps:
-      - name: Check for secrets needed to run workflow
-        id: check_secrets
-        run: echo '::set-output name=secret_key_valid::${{ secrets.STAGING_SECRET_KEY == github.event.inputs.secret_key }}'
+#  secrets-gate:
+#    runs-on: ubuntu-latest
+#    outputs:
+#      secret_key_valid: ${{ steps.check_secrets.outputs.secret_key_valid }}
+#    steps:
+#      - name: Check for secrets needed to run workflow
+#        id: check_secrets
+#        run: echo '::set-output name=secret_key_valid::${{ secrets.STAGING_SECRET_KEY == github.event.inputs.secret_key }}'
+#
+#      - name: Fail job if secret is not valid
+#        if: ${{ steps.check_secrets.outputs.secret_key_valid != 'true' }}
+#        run: exit 1
 
-      - name: Fail job if secret is not valid
-        if: ${{ steps.check_secrets.outputs.secret_key_valid != 'true' }}
-        run: exit 1
+  check_authentication:
+    uses: ./.github/workflows/secrets_gateway.yml
+    with:
+      secret_key: ${{ github.event.inputs.secret_key }}
+    secrets:
+      staging_secret_key: ${{ secrets.STAGING_SECRET_KEY }}
 
   deploy:
-    needs:
-      - secrets-gate
+#    needs:
+#      - secrets-gate
     name: Capistrano Deploy to Staging Server
     runs-on: ubuntu-latest
     concurrency: staging_environment

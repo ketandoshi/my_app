@@ -68,7 +68,7 @@ jobs:
 
     steps:
       - name: Install Github actions key to runner
-        if: github.event.inputs.secret_key == ${{ secrets.STAGING_SECRET_KEY }}
+        if: github.event.inputs.secret_key == secrets.STAGING_SECRET_KEY
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_KEY_GITHUB_ACTIONS }}

@@ -54,15 +54,13 @@ jobs:
         id: check_secrets
         run: echo '::set-output name=secret_key_valid::${{ secrets.STAGING_SECRET_KEY == github.event.inputs.secret_key }}'
 
-      - name: Check for secrets validity
+      - name: Fail job if secret is not valid
         if: ${{ steps.check_secrets.outputs.secret_key_valid != 'true' }}
         run: exit 1
 
   deploy:
     needs:
       - secrets-gate
-    #if: ${{ needs.secrets-gate.outputs.staging_secret_key == github.event.inputs.secret_key }}
-    #if: ${{ needs.secrets-gate.outputs.secret_key_valid != 'true' }}
     name: Capistrano Deploy to Staging Server
     runs-on: ubuntu-latest
     concurrency: staging_environment

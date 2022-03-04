@@ -40,7 +40,7 @@ on:
         description: 'Server Restart?'
         required: false
         type: boolean
-      secret_key:
+      input_secret_key:
         description: 'Please provide secret key'
         required: true
 
@@ -58,12 +58,12 @@ jobs:
 #        if: ${{ steps.check_secrets.outputs.secret_key_valid != 'true' }}
 #        run: exit 1
 
-  check_authentication:
+  authenticator:
     uses: ./.github/workflows/secrets_gateway.yml
     with:
-      secret_key: ${{ github.event.inputs.secret_key }}
+      input_secret_key: ${{ github.event.inputs.input_secret_key }}
     secrets:
-      staging_secret_key: ${{ secrets.STAGING_SECRET_KEY }}
+      secret_key: ${{ secrets.STAGING_SECRET_KEY }}
 
   deploy:
     needs:

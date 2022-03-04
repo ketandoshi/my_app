@@ -45,6 +45,17 @@ on:
         required: true
 
 jobs:
+#  secrets-gate:
+#    runs-on: ubuntu-latest
+#    outputs:
+#      ok: ${{ steps.check-secrets.outputs.ok }}
+#    steps:
+#      - name: check for secrets needed to run demo
+#        id: check-secrets
+#        run: |
+#          if [ ! -z "${{ secrets.CLOUDTRUTH_API_KEY }}" ]; then
+#            echo "::set-output name=ok::true"
+#          fi
   deploy:
     name: Capistrano Deploy to Staging Server
     runs-on: ubuntu-latest
@@ -65,11 +76,11 @@ jobs:
       HKTUP: ${{ github.event.inputs.hktup_core }}
       SANDBOX2: ${{ github.event.inputs.sandbox2_core }}
       SGSCAN: ${{ github.event.inputs.sgscan_core }}
+      STAGING_SECRET_KEY: ${{ github.event.inputs.STAGING_SECRET_KEY }}
 
+    if: ${{ github.event.inputs.secret_key == env.STAGING_SECRET_KEY }}
     steps:
       - name: Install Github actions key to runner
-        #if: ${{ github.event.inputs.secret_key == secrets.STAGING_SECRET_KEY }}
-        if: ${{ secrets.STAGING_SECRET_KEY == 'myappkey' }}
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_KEY_GITHUB_ACTIONS }}

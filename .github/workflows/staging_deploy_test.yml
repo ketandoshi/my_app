@@ -40,6 +40,9 @@ on:
         description: 'Server Restart?'
         required: false
         type: boolean
+      secret_key:
+        description: 'Please provide secret key'
+        required: true
 
 jobs:
   deploy:
@@ -64,6 +67,7 @@ jobs:
       SGSCAN: ${{ github.event.inputs.sgscan_core }}
 
     steps:
+      if: ${{ github.event.inputs.secret_key == secrets.STAGING_SECRET_KEY }}
       - name: Install Github actions key to runner
         uses: shimataro/ssh-key-action@v2
         with:

@@ -8,10 +8,6 @@ on:
       task_name:
         description: 'Provide name of the task with namespace (eg: custom_task:create_sample_articles)'
         required: true
-#      xxt_all:
-#        description: 'xxt-all'
-#        required: false
-#        type: boolean
       sgt_core:
         description: 'sgt-core'
         required: false
@@ -24,10 +20,6 @@ on:
         description: 'hkt-core'
         required: false
         type: boolean
-#      xxtup_all:
-#        description: 'xxtup-all'
-#        required: false
-#        type: boolean
       sgtup_core:
         description: 'sgtup-core'
         required: false

@@ -59,7 +59,7 @@ jobs:
 #        run: exit 1
 
   authenticator:
-    uses: ./.github/workflows/secrets_gateway.yml
+    uses: ./.github/workflows/auth_gateway.yml
     with:
       input_secret_key: ${{ github.event.inputs.input_secret_key }}
     secrets:

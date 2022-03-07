@@ -40,9 +40,21 @@ on:
         description: 'sgscan-core'
         required: false
         type: boolean
+      input_secret_key:
+        description: 'Please provide secret key'
+        required: true
 
 jobs:
+  authenticator:
+    uses: ./.github/workflows/secrets_gateway.yml
+    with:
+      input_secret_key: ${{ github.event.inputs.input_secret_key }}
+    secrets:
+      secret_key: ${{ secrets.STAGING_SECRET_KEY }}
+
   execute_task:
+    needs:
+      - authenticator
     name: Custom task execution
     runs-on: ubuntu-latest
     concurrency: staging_environment
